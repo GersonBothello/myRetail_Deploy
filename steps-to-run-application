@@ -52,5 +52,36 @@ https://docs.datastax.com/en/dse/6.7/cql/cql/cql_using/startCqlshStandalone.html
 	        "currentPrice": 19.99,
     	    "currencyCode": "USD"
 	    }
-}
+    }
 	
+
+
+To make changes to the default config settings for DB and/or Tomcat
+
+1) Create a new text file name is application.properties.
+
+2) Copy the below settings to the file
+
+	#Application 
+	spring.application.name=myretail-service
+	server.port=8080
+
+	#Cassandra DB
+	spring.data.cassandra.contact-points=localhost
+	spring.data.cassandra.port=9042
+	spring.data.cassandra.keyspace-name=myretail
+
+	#Logging
+	#logging.level.com.myretail.service=DEBUG
+	
+3) Execute the command below to overide the default settings
+	java -jar myRetailServices-0.0.1-SNAPSHOT.jar --spring.config.location=file:///myFilepath/application.properties
+
+
+
+
+
+
+
+
+
