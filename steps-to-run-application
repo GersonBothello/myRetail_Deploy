@@ -1,0 +1,56 @@
+To run the Application
+
+1)Copy the jar file to a local folder.
+ The application needs Java 8 to run. If you don't have a recent version of Java 8, download and install OpenJDK 8.
+
+
+2)Install Cassandra No SQL DB.
+ Download DataStax Cassandra 6.8 from the link below
+ https://downloads.datastax.com/#enterprise
+
+ Follow steps from the link below to install Cassandra
+ https://docs.datastax.com/en/install/6.8/install/dseBasicInstall.html
+
+
+3)	Open CQL (Cassandra query language) link below 
+https://docs.datastax.com/en/dse/6.7/cql/cql/cql_using/startCqlshStandalone.html
+
+
+4)	Run the CQL scripts to create the keyspace, table and data.
+
+	/* Key Space */
+	CREATE KEYSPACE myretail
+	  WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 1};
+
+	/* Table */
+	CREATE TABLE product_price(
+		product_id int,
+		current_price decimal,
+		currency_code text,
+		PRIMARY KEY(product_id));
+
+	/* Data */
+	INSERT INTO product_price (product_id, current_price, currency_code) VALUES (13860428, 13.49, 'USD');
+	INSERT INTO product_price (product_id, current_price, currency_code) VALUES (77400978, 19.99, 'USD');
+	INSERT INTO product_price (product_id, current_price, currency_code) VALUES (77285200, 9.60, 'USD');
+	INSERT INTO product_price (product_id, current_price, currency_code) VALUES (52918604, 19.99, 'USD');
+	INSERT INTO product_price (product_id, current_price, currency_code) VALUES (15302388, 39.99, 'USD');
+     
+5)	Running the service 
+	Using command line navigate to the folder where the .jar file is located. Run the command below.
+	java -jar myRetailServices-0.0.1-SNAPSHOT.jar;
+
+6) Copy and paste the link below the browser 
+	http://localhost:8080/v1/products/77400978
+	 
+	Response: 
+		{
+ 		   "productId": 77400978,
+		    "productName": "Men's Phillip Twin Gore Sneakers - Goodfellow & Co™ Charcoal 9.5",
+		    "currentPrice": {
+        	"productId": 77400978,
+	        "currentPrice": 19.99,
+    	    "currencyCode": "USD"
+	    }
+}
+	
